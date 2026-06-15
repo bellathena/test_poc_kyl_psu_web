@@ -15,7 +15,7 @@ export type CreateRequest = {
 }
 
 export type UpdateRequest = {
-    request_number: string,
+    request_id: string,
     title: string,
     request_type: RequestType,
     requester_name: string,
@@ -24,5 +24,5 @@ export type UpdateRequest = {
 }
 
 export type DeleteRequest = {
-    request_number: string
+    request_id: string
 }

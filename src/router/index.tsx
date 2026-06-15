@@ -18,7 +18,7 @@ const Router = () => {
             element: <RequestFormPage/>
         },
         {
-            path: "request/:request_number/edit",
+            path: "request/:request_id/edit",
             element: <RequestFormPage/>
         }
   ])

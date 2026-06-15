@@ -136,7 +136,7 @@ const Requestpage = () => {
             type="primary"
             size="small"
             icon={<EditOutlined />}
-            onClick={() => navigate(`/request/${record.request_number}/edit`)}
+            onClick={() => navigate(`/request/${record.request_id}/edit`)}
             style={{ borderRadius: 6 }}
           >
             แก้ไข
@@ -144,7 +144,7 @@ const Requestpage = () => {
           <Popconfirm
             title="ยืนยันการลบ"
             description="คุณแน่ใจหรือไม่ว่าต้องการลบคำขอนี้?"
-            onConfirm={() => handleDelete(record.request_number)}
+            onConfirm={() => handleDelete(record.request_id)}
             okText="ลบ"
             cancelText="ยกเลิก"
             okButtonProps={{ danger: true }}
@@ -171,9 +171,9 @@ const Requestpage = () => {
     setPage(1);
   };
 
-  const handleDelete = async (request_number: string) => {
+  const handleDelete = async (request_id: string) => {
     try {
-      await requestService.deleteRequest({ request_number });
+      await requestService.deleteRequest({ request_id });
       message.success("ลบคำขอเรียบร้อยแล้ว");
       refetch();
     } catch {

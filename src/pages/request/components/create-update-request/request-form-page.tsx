@@ -37,8 +37,8 @@ const { TextArea } = Input;
 
 const RequestFormPage = () => {
   const navigate = useNavigate();
-  const { request_number } = useParams<{ request_number: string }>();
-  const mode: "add" | "edit" = request_number ? "edit" : "add";
+  const { request_id } = useParams<{ request_id: string }>();
+  const mode: "add" | "edit" = request_id ? "edit" : "add";
   const { modal } = App.useApp();
 
   const [form] = Form.useForm();
@@ -48,7 +48,7 @@ const RequestFormPage = () => {
     data: currentRequest,
     isLoading: fetchLoading,
     error: fetchError,
-  } = useLoadRequestData(mode === "edit" ? request_number : undefined);
+  } = useLoadRequestData(mode === "edit" ? request_id : undefined);
 
   useEffect(() => {
     if (fetchError) {
@@ -82,8 +82,8 @@ const RequestFormPage = () => {
         const data: CreateRequest = values;
         await requestService.createRequest(data);
         message.success("สร้างคำขอใหม่เรียบร้อยแล้ว");
-      } else if (request_number) {
-        const data: UpdateRequest = { request_number, ...values };
+      } else if (request_id) {
+        const data: UpdateRequest = { request_id, ...values };
         await requestService.updateRequest(data);
         message.success("บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว");
       }
@@ -117,9 +117,9 @@ const RequestFormPage = () => {
       cancelText: "ยกเลิก",
       okButtonProps: { danger: true, type: "primary" },
       async onOk() {
-        if (request_number) {
+        if (request_id) {
           try {
-            await requestService.deleteRequest({ request_number });
+            await requestService.deleteRequest({ request_id });
             message.success("ลบคำขอเรียบร้อยแล้ว");
             navigate("/request");
           } catch {

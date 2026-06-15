@@ -7,16 +7,9 @@ export const requestService = {
         const response = await baseApi.post<ResultRequestPaginationByCriteria>("/request/list", data)
         return response.data
     },
-    async getRequestById(request_number: string): Promise<ResultRequestById> {
-        const response = await baseApi.post<ResultRequestPaginationByCriteria>("/request/list", {
-            page: 1,
-            limit: 1,
-            criteria: { search: request_number }
-        })
-        if (response.data.data.length === 0) {
-            throw new Error("Request not found")
-        }
-        return response.data.data[0]
+    async getRequestById(request_id: string): Promise<ResultRequestById> {
+        const response = await baseApi.get<ResultRequestById>(`/request/${request_id}`)
+        return response.data
     },
     async createRequest(data: CreateRequest): Promise<string> {
         const response = await baseApi.post<string>("/request/create", data)

@@ -1,6 +1,7 @@
 import type { ResponseTable } from "../../../types/api/response-table"
 
 export type RequestItem = {
+    request_id: string;
     request_number: string;
     title: string;
     request_type: string;

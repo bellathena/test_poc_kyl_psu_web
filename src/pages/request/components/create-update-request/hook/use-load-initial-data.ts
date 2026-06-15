@@ -9,14 +9,14 @@ interface UseLoadRequestDataReturn {
   refetch: () => void;
 }
 
-export const useLoadRequestData = (request_number?: string): UseLoadRequestDataReturn => {
+export const useLoadRequestData = (request_id?: string): UseLoadRequestDataReturn => {
   const [data, setData] = useState<RequestItem | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   const fetchData = async () => {
-    if (!request_number) return;
+    if (!request_id) return;
 
     abortRef.current?.abort();
     const controller = new AbortController();
@@ -26,7 +26,7 @@ export const useLoadRequestData = (request_number?: string): UseLoadRequestDataR
       setIsLoading(true);
       setError(null);
 
-      const result = await requestService.getRequestById(request_number);
+      const result = await requestService.getRequestById(request_id);
 
       if (!controller.signal.aborted) {
         setData(result);
@@ -43,13 +43,13 @@ export const useLoadRequestData = (request_number?: string): UseLoadRequestDataR
   };
 
   useEffect(() => {
-    if (request_number) {
+    if (request_id) {
       fetchData();
     }
     return () => {
       abortRef.current?.abort();
     };
-  }, [request_number]);
+  }, [request_id]);
 
   return {
     data,
