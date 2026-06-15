@@ -16,11 +16,11 @@ export const requestService = {
         return response.data
     },
     async updateRequest(data: UpdateRequest): Promise<string> {
-        const response = await baseApi.put<string>("/request/update", data)
+        const response = await baseApi.post<string>("/request/update", data)
         return response.data
     },
     async deleteRequest(data: DeleteRequest): Promise<string> {
-        const response = await baseApi.delete<string>("/request/delete", { data })
+        const response = await baseApi.post<string>("/request/delete", data)
         return response.data
     }
 }
