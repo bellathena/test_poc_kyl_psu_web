@@ -95,40 +95,7 @@ const RequestFormPage = () => {
     }
   };
 
-  const handleDelete = () => {
-    modal.confirm({
-      title: "ยืนยันการลบคำขอ",
-      icon: <ExclamationCircleOutlined style={{ color: "#ff4d4f" }} />,
-      content: (
-        <div style={{ marginTop: 8 }}>
-          <Text>คุณแน่ใจหรือไม่ว่าต้องการลบคำขอ</Text>
-          <br />
-          <Text strong style={{ color: "#ff4d4f" }}>
-            "{currentRequest?.title}"
-          </Text>
-          <br />
-          <Text style={{ color: "#ff4d4f", fontSize: 13 }}>
-            การดำเนินการนี้ไม่สามารถกู้คืนได้
-          </Text>
-        </div>
-      ),
-      okText: "ยืนยันการลบ",
-      okType: "danger",
-      cancelText: "ยกเลิก",
-      okButtonProps: { danger: true, type: "primary" },
-      async onOk() {
-        if (request_id) {
-          try {
-            await requestService.deleteRequest({ request_id });
-            message.success("ลบคำขอเรียบร้อยแล้ว");
-            navigate("/request");
-          } catch {
-            message.error("ไม่สามารถลบคำขอได้");
-          }
-        }
-      },
-    });
-  };
+  
 
   const typeOptions = (Object.keys(REQUEST_TYPE_LABELS) as RequestType[]).map((key) => ({
     value: key,
@@ -326,19 +293,7 @@ const RequestFormPage = () => {
                   flexWrap: "wrap",
                   gap: 12,
                 }}>
-                  <div>
-                    {mode === "edit" && (
-                      <Button
-                        danger
-                        icon={<DeleteOutlined />}
-                        onClick={handleDelete}
-                        size="large"
-                        style={{ borderRadius: 8 }}
-                      >
-                        ลบคำขอ
-                      </Button>
-                    )}
-                  </div>
+                  <div></div>
                   <div style={{ display: "flex", gap: 8 }}>
                     <Button
                       size="large"
