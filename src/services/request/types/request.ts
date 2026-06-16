@@ -1,5 +1,6 @@
 import type { RequestTable } from "../../../types/api/request-table"
 import { RequestType } from "../../../const/enum/request-type"
+import type { StatusRequest } from "../../../const/enum/status-request"
 
 export type GetRequestPaginationByCriteria = RequestTable<{
     search?: string
@@ -25,4 +26,17 @@ export type UpdateRequest = {
 
 export type DeleteRequest = {
     request_id: string
+}
+
+export type AdminUpdateStatusRequest = {
+    request_id: string
+    new_status: StatusRequest
+    admin_response?: string
+}
+
+export type AdminUpdateStatusResponse = {
+    request_id: string
+    old_status: StatusRequest
+    new_status: StatusRequest
+    admin_response: string | null
 }

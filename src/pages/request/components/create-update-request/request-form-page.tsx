@@ -125,6 +125,22 @@ const RequestFormPage = () => {
       title: "Book Delivery",
       desc: "ขอรับหนังสือจากห้องสมุดหรือสาขาอื่น",
     },
+    {
+      key: RequestType.ILL,
+      color: "#722ed1",
+      bg: "#f9f0ff",
+      border: "#722ed122",
+      title: "Interlibrary Loan",
+      desc: "ยืมเอกสาร/ทรัพยากรระหว่างห้องสมุด",
+    },
+    {
+      key: RequestType.ACADEMIC_PUBLICATION_DISSEMINATION,
+      color: "#13c2c2",
+      bg: "#e6fffb",
+      border: "#13c2c222",
+      title: "เผยแพร่งานวิชาการ",
+      desc: "เผยแพร่ผลงานทางวิชาการผ่านระบบ",
+    },
   ];
 
   return (

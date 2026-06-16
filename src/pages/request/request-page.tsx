@@ -33,6 +33,7 @@ import type { RequestItem } from "../../services/request/types/response";
 import { requestService } from "../../services/request";
 import { RequestType } from "../../const/enum/request-type";
 import { REQUEST_TYPE_LABELS, REQUEST_TYPE_COLORS } from "../../const/enum/request-type-labels";
+import { StatusRequest, STATUS_REQUEST_LABELS, STATUS_REQUEST_COLORS } from "../../const/enum/status-request";
 
 const { Title, Text } = Typography;
 const { Search } = Input;
@@ -86,6 +87,17 @@ const Requestpage = () => {
       render: (text: string) => <Text style={{ fontSize: 13 }}>{text}</Text>,
     },
     {
+      title: "สถานะ",
+      dataIndex: "status",
+      key: "status",
+      width: 120,
+      render: (status: StatusRequest) => (
+        <Tag color={STATUS_REQUEST_COLORS[status]} style={{ borderRadius: 12, padding: "2px 10px" }}>
+          {STATUS_REQUEST_LABELS[status]}
+        </Tag>
+      ),
+    },
+    {
       title: "ประเภทบริการ",
       dataIndex: "request_type",
       key: "request_type",
@@ -110,6 +122,22 @@ const Requestpage = () => {
       width: 220,
       render: (email: string) => (
         <a href={`mailto:${email}`} style={{ color: "#1677ff", fontSize: 13 }}>{email}</a>
+      ),
+    },
+    {
+      title: "คำตอบกลับ",
+      dataIndex: "admin_response",
+      key: "admin_response",
+      width: 180,
+      ellipsis: { showTitle: false },
+      render: (text: string | null) => (
+        text ? (
+          <Tooltip placement="topLeft" title={text}>
+            <Text style={{ fontSize: 12, color: "#595959" }}>{text}</Text>
+          </Tooltip>
+        ) : (
+          <Text style={{ fontSize: 12, color: "#bfbfbf" }}>-</Text>
+        )
       ),
     },
     {
@@ -273,6 +301,8 @@ const Requestpage = () => {
               { value: RequestType.FIND_FULLTEXT_4U, label: "Find Fulltext 4U" },
               { value: RequestType.ITHENTICATE, label: "iThenticate" },
               { value: RequestType.BOOK_DELIVERY, label: "Book Delivery" },
+              { value: RequestType.ILL, label: "Interlibrary Loan" },
+              { value: RequestType.ACADEMIC_PUBLICATION_DISSEMINATION, label: "เผยแพร่งานวิชาการ" },
             ]}
           />
           <Button icon={<ReloadOutlined />} onClick={refetch} style={{ borderRadius: 6 }}>
@@ -290,7 +320,7 @@ const Requestpage = () => {
           dataSource={data}
           rowKey="request_number"
           loading={isLoading}
-          scroll={{ x: 900 }}
+          scroll={{ x: 1300 }}
           pagination={{
             current: page,
             pageSize: limit,
